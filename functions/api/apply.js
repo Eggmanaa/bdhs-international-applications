@@ -4,7 +4,7 @@
 
 import { sendNotification } from '../_shared/email.js';
 
-const MAX_FILE_BYTES = 10 * 1024 * 1024;
+const MAX_FILE_BYTES = 50 * 1024 * 1024;
 const FILE_FIELDS = [
   'doc_transcript_current',
   'doc_transcript_prior1',

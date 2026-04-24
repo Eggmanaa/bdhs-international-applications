@@ -168,10 +168,13 @@
   .stats { background: var(--gray-light); }
   .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 24px;
-    max-width: 1120px;
+    max-width: 980px;
     margin: 0 auto;
+  }
+  @media (max-width: 720px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
   }
   .stat {
     text-align: center;
@@ -222,16 +225,14 @@
   }
   .pillar-row:first-child { border-top: none; padding-top: 0; }
   .pillar-row:last-child { padding-bottom: 0; }
-  .pillar-icon {
-    flex-shrink: 0;
-    width: 48px; height: 48px;
+  .pillar-row h3 { position: relative; padding-left: 0; }
+  .pillar-row h3::before {
+    content: "";
+    display: block;
+    width: 36px;
+    height: 3px;
     background: var(--cardinal);
-    color: var(--white);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Playfair Display', serif;
-    font-weight: 900;
-    font-size: 1.3rem;
+    margin-bottom: 10px;
   }
   .pillar-row h3 { font-size: 1.3rem; margin-bottom: 6px; }
   .pillar-row p { color: var(--gray-dark); font-size: 0.97rem; }
@@ -342,9 +343,15 @@
   /* LOCATION */
   .location-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     margin-top: 40px;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media (max-width: 720px) {
+    .location-grid { grid-template-columns: 1fr; }
   }
   .location-card {
     padding: 26px 24px;
@@ -782,21 +789,18 @@
         <p class="section-lede">Most American high schools enroll international students. Very few invest in them the way we do. A dedicated International Program Coordinator teaches, advises, and advocates for every international student across all four years.</p>
 
         <div class="pillar-row">
-          <div class="pillar-icon">C</div>
           <div>
             <h3>Care</h3>
             <p>A dedicated International Program Coordinator is available daily for academic support across every subject. Your student is known by name, not by a number.</p>
           </div>
         </div>
         <div class="pillar-row">
-          <div class="pillar-icon">N</div>
           <div>
             <h3>Nurture</h3>
             <p>Our International Buddy System pairs every new international student with a local peer. Mandarin-speaking staff provide additional support for Chinese families.</p>
           </div>
         </div>
         <div class="pillar-row">
-          <div class="pillar-icon">S</div>
           <div>
             <h3>Support</h3>
             <p>Individualized college essay coaching, test preparation, and ongoing communication with families in their preferred language. Modified assignments when English language development calls for it.</p>
@@ -849,6 +853,7 @@
         <tr><td><span class="rank-pill">#33</span></td><td>UC Davis</td><td>Jet, Claire</td></tr>
         <tr><td><span class="rank-pill">#33</span></td><td>UC Irvine</td><td>Maruko, Von</td></tr>
         <tr><td><span class="rank-pill">#39</span></td><td>UC Santa Barbara</td><td>Elsa</td></tr>
+        <tr><td><span class="rank-pill">#42</span></td><td>University of Washington – Seattle</td><td>Philip</td></tr>
         <tr><td><span class="rank-pill">#46</span></td><td>University of Washington – Seattle</td><td>Clark</td></tr>
         <tr><td><span class="rank-pill">#46</span></td><td>Purdue University</td><td>Harry</td></tr>
       </tbody>
@@ -876,20 +881,31 @@
           Your browser does not support embedded video.
         </video>
         <div class="video-card-body">
-          <div class="video-meta">Campus Tour &middot; 60 seconds</div>
+          <div class="video-meta">Campus Tour &middot; 2 minutes</div>
           <h3>A Walk Through Campus</h3>
-          <p>Brick courtyards, the bell tower, the Pacific in the distance. A quick look at the Santa Barbara campus international students call home.</p>
+          <p>Brick courtyards, the bell tower, the Pacific in the distance. A full tour of the Santa Barbara campus international students call home.</p>
         </div>
       </div>
       <div class="video-card">
-        <video controls preload="metadata" poster="/videos/program-overview-poster.jpg">
-          <source src="/videos/program-overview.mp4" type="video/mp4">
+        <video controls preload="metadata" poster="/videos/po-part1-poster.jpg">
+          <source src="/videos/po-part1.mp4" type="video/mp4">
           Your browser does not support embedded video.
         </video>
         <div class="video-card-body">
-          <div class="video-meta">Program Overview &middot; 2 minutes</div>
+          <div class="video-meta">Program Overview &middot; Part 1 of 2</div>
           <h3>Inside the International Program</h3>
-          <p>An introduction to the Care, Nurture, Support model, the dedicated coordinator, and how international students integrate into the full Bishop Diego experience. <em>For the complete program overview, contact Mr. Eggman.</em></p>
+          <p>An introduction to the Care, Nurture, Support model and the dedicated coordinator who teaches and advocates for international students across all four years.</p>
+        </div>
+      </div>
+      <div class="video-card">
+        <video controls preload="metadata" poster="/videos/po-part1-poster.jpg">
+          <source src="/videos/po-part2.mp4" type="video/mp4">
+          Your browser does not support embedded video.
+        </video>
+        <div class="video-card-body">
+          <div class="video-meta">Program Overview &middot; Part 2 of 2</div>
+          <h3>Outcomes and the Bishop Community</h3>
+          <p>How our international graduates land at Cornell, USC, NYU, and beyond, and how the Buddy System and small-school community bring every student in.</p>
         </div>
       </div>
     </div>
@@ -962,7 +978,7 @@
     </div>
     <div class="note-callout">
       <strong>Already applied?</strong>
-      If you've already submitted an application and need to add more documents, use the unique upload link that was shown after your application. Lost it? Email Mr. Eggman at <a href="mailto:aeggman@bishopdiego.org">aeggman@bishopdiego.org</a>.
+      If you've already submitted an application and need to add more documents, use the unique upload link that was shown after your application, or email them directly to Mr. Eggman at <a href="mailto:aeggman@bishopdiego.org">aeggman@bishopdiego.org</a>.
     </div>
   </div>
 </section>
@@ -971,7 +987,7 @@
   <div class="container">
     <span class="eyebrow" style="display:block;text-align:center;">Begin Your Journey</span>
     <h2 class="section-title">International Student Application</h2>
-    <p class="section-lede">Fields marked with <span style="color: var(--cardinal); font-weight: 700;">*</span> are required. <strong>Documents are optional at this step</strong>, upload what you have and add the rest later using your personal upload link. All information is kept confidential.</p>
+    <p class="section-lede">Fields marked with <span style="color: var(--cardinal); font-weight: 700;">*</span> are required. <strong>Documents are optional at this step</strong>, upload what you have or send them directly to Mr. Eggman at <a href="mailto:aeggman@bishopdiego.org">aeggman@bishopdiego.org</a>. You can also add more later using your personal upload link. All information is kept confidential.</p>
 
     <form class="application" id="application-form" enctype="multipart/form-data" novalidate>
 
@@ -979,7 +995,7 @@
         <h3>Before You Begin</h3>
         <p>This application should be completed in one sitting (your answers are not saved as you go). Estimated time: 45–60 minutes.</p>
         <p style="margin-top:10px;">The Student Questionnaire (Section 5) will ask you to answer six short essay questions. You may want to prepare your answers ahead of time. We recommend a 300-character maximum per question.</p>
-        <p style="margin-top:10px;"><strong>Good news about documents:</strong> you don't need them all right now. Submit the application first, and you'll get a unique link to upload documents as you gather them.</p>
+        <p style="margin-top:10px;"><strong>Good news about documents:</strong> you don't need them all right now. Submit the application first, then upload what you have or email documents directly to Mr. Eggman at <a href="mailto:aeggman@bishopdiego.org">aeggman@bishopdiego.org</a>. You can also return anytime using your unique upload link.</p>
       </div>
 
       <div class="form-section">
@@ -1342,7 +1358,7 @@
 
       <div class="form-section">
         <div class="form-section-title">Document Uploads <span style="font-family:'Lato',sans-serif; font-weight:400; font-size:0.9rem; text-transform:none; letter-spacing:0; color: var(--gray-dark);">(optional at this step)</span></div>
-        <div class="form-section-desc">Upload what you have. After you submit, you'll get a personal link to add the rest whenever you're ready. Each field accepts PDF or image files up to 10 MB.</div>
+        <div class="form-section-desc">Upload what you have. After you submit, you'll get a personal link to add the rest whenever you're ready. You can also email documents directly to Mr. Eggman at aeggman@bishopdiego.org. Each field accepts PDF or image files up to 50 MB.</div>
 
         <div class="file-group"><label>Current school year transcripts</label><input type="file" name="doc_transcript_current" accept=".pdf,.jpg,.jpeg,.png,.heic"></div>
         <div class="file-group"><label>Prior year 1 transcripts</label><input type="file" name="doc_transcript_prior1" accept=".pdf,.jpg,.jpeg,.png,.heic"></div>

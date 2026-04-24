@@ -1,7 +1,7 @@
 // GET  /api/application/:id/documents?token=...  — list already-uploaded docs (for upload.html)
 // POST /api/application/:id/documents?token=...  — upload more docs to an existing application
 
-const MAX_FILE_BYTES = 10 * 1024 * 1024;
+const MAX_FILE_BYTES = 50 * 1024 * 1024;
 const FILE_FIELDS = [
   'doc_transcript_current',
   'doc_transcript_prior1',
