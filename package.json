@@ -1,0 +1,16 @@
+{
+  "name": "bdhs-international-applications",
+  "version": "1.0.0",
+  "description": "Bishop Diego High School — International Student Program marketing site, application portal, and admin console.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler pages dev public --d1 DB=bdhs-intl-applications --r2 DOCS=bdhs-intl-docs",
+    "deploy": "wrangler pages deploy public --project-name bdhs-international-applications",
+    "db:init:local": "wrangler d1 execute bdhs-intl-applications --local --file=./schema.sql",
+    "db:init:remote": "wrangler d1 execute bdhs-intl-applications --remote --file=./schema.sql"
+  },
+  "devDependencies": {
+    "wrangler": "^3.80.0"
+  }
+}

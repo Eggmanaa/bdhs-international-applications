@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin Console | BDHS International Applications</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@500;600;700&family=Playfair+Display:ital,wght@0,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cardinal: #A20927;
+    --cardinal-dark: #7a0720;
+    --white: #ffffff;
+    --black: #000000;
+    --gray: #dddddd;
+    --gray-dark: #555555;
+    --gray-light: #f5f5f5;
+    --accent-blue: #2c5282;
+    --accent-green: #2f855a;
+    --accent-amber: #b7791f;
+    --accent-red: #c53030;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Lato', Arial, sans-serif;
+    background: var(--gray-light);
+    color: var(--black);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; color: var(--cardinal); }
+
+  /* HEADER */
+  header {
+    background: var(--cardinal);
+    color: var(--white);
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  }
+  header .brand { display: flex; align-items: center; gap: 14px; }
+  header .brand-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--white);
+  }
+  header .brand-sub {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.85;
+  }
+  header .actions { display: flex; gap: 10px; align-items: center; }
+  header .user-info { font-size: 0.85rem; opacity: 0.85; }
+  header button {
+    background: transparent;
+    color: var(--white);
+    border: 1.5px solid var(--white);
+    padding: 6px 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+  header button:hover { background: var(--white); color: var(--cardinal); }
+
+  /* LOGIN SCREEN */
+  #login-screen {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, var(--cardinal) 0%, var(--cardinal-dark) 100%);
+    padding: 24px;
+  }
+  .login-card {
+    background: var(--white);
+    padding: 48px 40px;
+    max-width: 440px;
+    width: 100%;
+    border-top: 6px solid var(--cardinal);
+    box-shadow: 0 10px 40px rgba(0,0,0,.25);
+  }
+  .login-card h2 { margin-bottom: 6px; font-size: 1.8rem; }
+  .login-card p { color: var(--gray-dark); font-size: 0.9rem; margin-bottom: 28px; }
+  .login-card label {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+  }
+  .login-card input[type=password] {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--gray);
+    font-size: 1rem;
+    margin-bottom: 18px;
+  }
+  .login-card input:focus { outline: none; border-color: var(--cardinal); }
+  .login-card button {
+    width: 100%;
+    padding: 14px;
+    background: var(--cardinal);
+    color: var(--white);
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+  }
+  .login-card button:hover { background: var(--cardinal-dark); }
+  .login-error {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    margin-bottom: 16px;
+    border-left: 3px solid #dc3545;
+    font-size: 0.9rem;
+    display: none;
+  }
+  .login-error.show { display: block; }
+
+  /* MAIN */
+  main { padding: 24px; max-width: 1400px; margin: 0 auto; }
+  .toolbar {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .toolbar input, .toolbar select {
+    padding: 9px 12px;
+    border: 1px solid var(--gray);
+    font-size: 0.92rem;
+    background: var(--white);
+    border-radius: 2px;
+  }
+  .toolbar input { min-width: 240px; }
+  .toolbar .spacer { flex: 1; }
+  .count-pill {
+    background: var(--cardinal);
+    color: var(--white);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  /* TABLE */
+  .table-wrap {
+    background: var(--white);
+    border-top: 4px solid var(--cardinal);
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+    overflow-x: auto;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+  }
+  th, td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--gray);
+  }
+  th {
+    background: var(--gray-light);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--black);
+  }
+  tr.clickable { cursor: pointer; }
+  tr.clickable:hover { background: #fff7f8; }
+
+  .status-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .status-New { background: #e6f4ff; color: var(--accent-blue); }
+  .status-InReview { background: #fef3c7; color: var(--accent-amber); }
+  .status-InterviewScheduled { background: #e0e7ff; color: #4c51bf; }
+  .status-Accepted { background: #d4edda; color: var(--accent-green); }
+  .status-Declined { background: #f8d7da; color: var(--accent-red); }
+  .status-Withdrawn { background: var(--gray); color: var(--gray-dark); }
+
+  .empty-state {
+    padding: 80px 20px;
+    text-align: center;
+    color: var(--gray-dark);
+  }
+  .empty-state h3 { color: var(--black); margin-bottom: 8px; }
+
+  /* DETAIL MODAL */
+  .modal-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.5);
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 20px;
+    z-index: 1000;
+    overflow-y: auto;
+  }
+  .modal-backdrop.open { display: flex; }
+  .modal {
+    background: var(--white);
+    max-width: 900px;
+    width: 100%;
+    border-top: 6px solid var(--cardinal);
+    box-shadow: 0 20px 60px rgba(0,0,0,.3);
+  }
+  .modal-header {
+    padding: 24px 28px;
+    border-bottom: 1px solid var(--gray);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .modal-header h2 { font-size: 1.5rem; margin-bottom: 4px; }
+  .modal-header .meta { font-size: 0.85rem; color: var(--gray-dark); }
+  .modal-close {
+    background: transparent;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--gray-dark);
+    line-height: 1;
+  }
+  .modal-close:hover { color: var(--cardinal); }
+
+  .modal-actions {
+    padding: 16px 28px;
+    background: var(--gray-light);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .modal-actions label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+  }
+  .modal-actions select {
+    padding: 8px 12px;
+    border: 1px solid var(--gray);
+    font-size: 0.9rem;
+    background: var(--white);
+  }
+  .modal-actions button {
+    padding: 8px 18px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border: none;
+    cursor: pointer;
+    background: var(--cardinal);
+    color: var(--white);
+  }
+  .modal-actions button:hover { background: var(--cardinal-dark); }
+  .modal-actions button:disabled { background: var(--gray); cursor: not-allowed; }
+
+  .modal-body {
+    padding: 24px 28px;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  .section-block { margin-bottom: 28px; }
+  .section-block h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--cardinal);
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--cardinal);
+    margin-bottom: 14px;
+  }
+  .field-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px 20px;
+  }
+  .field-grid .f-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--gray-dark);
+    margin-bottom: 2px;
+  }
+  .field-grid .f-val {
+    font-size: 0.95rem;
+    color: var(--black);
+    word-wrap: break-word;
+  }
+  .field-grid .f-val.empty { color: var(--gray); font-style: italic; }
+  .full-col { grid-column: 1 / -1; }
+  .pre-text {
+    background: var(--gray-light);
+    padding: 12px;
+    white-space: pre-wrap;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.93rem;
+    border-left: 3px solid var(--cardinal);
+  }
+  .doc-list { display: flex; flex-direction: column; gap: 8px; }
+  .doc-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background: var(--gray-light);
+    border-left: 3px solid var(--cardinal);
+  }
+  .doc-name { font-weight: 600; font-size: 0.9rem; }
+  .doc-type { font-size: 0.8rem; color: var(--gray-dark); }
+  .doc-item a {
+    color: var(--cardinal);
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .doc-item a:hover { text-decoration: underline; }
+
+  .notes-area {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--gray);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.95rem;
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  .loading { text-align: center; padding: 40px; color: var(--gray-dark); }
+</style>
+</head>
+<body>
+
+<!-- ========= LOGIN SCREEN ========= -->
+<div id="login-screen">
+  <div class="login-card">
+    <h2>Admin Console</h2>
+    <p>Bishop Diego International Applications</p>
+    <div class="login-error" id="login-error">Incorrect password. Please try again.</div>
+    <form id="login-form">
+      <label for="password">Admin Password</label>
+      <input type="password" id="password" name="password" autocomplete="current-password" required>
+      <button type="submit">Sign In</button>
+    </form>
+  </div>
+</div>
+
+<!-- ========= MAIN APP ========= -->
+<div id="app" style="display: none;">
+
+<header>
+  <div class="brand">
+    <svg height="44" viewBox="0 0 600 360" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <text x="10" y="170" fill="#fff" font-family="Playfair Display, Georgia, serif" font-size="220" font-weight="700">B</text>
+      <text x="135" y="120" fill="#fff" font-family="Playfair Display, serif" font-size="78" font-weight="600">ISHOP</text>
+      <text x="60" y="290" fill="#fff" font-family="Playfair Display, serif" font-size="220" font-weight="700">D</text>
+      <text x="195" y="240" fill="#fff" font-family="Playfair Display, serif" font-size="78" font-weight="600">IEGO</text>
+    </svg>
+    <div>
+      <div class="brand-title">Admin Console</div>
+      <div class="brand-sub">International Applications</div>
+    </div>
+  </div>
+  <div class="actions">
+    <span class="user-info" id="user-info"></span>
+    <button id="logout-btn">Sign Out</button>
+  </div>
+</header>
+
+<main>
+  <div class="toolbar">
+    <input type="search" id="search" placeholder="Search name, email, country..." />
+    <select id="filter-status">
+      <option value="">All Statuses</option>
+      <option value="New">New</option>
+      <option value="In Review">In Review</option>
+      <option value="Interview Scheduled">Interview Scheduled</option>
+      <option value="Accepted">Accepted</option>
+      <option value="Declined">Declined</option>
+      <option value="Withdrawn">Withdrawn</option>
+    </select>
+    <select id="filter-term">
+      <option value="">All Terms</option>
+    </select>
+    <div class="spacer"></div>
+    <span class="count-pill" id="count-pill">0 applications</span>
+  </div>
+
+  <div class="table-wrap">
+    <table id="apps-table">
+      <thead>
+        <tr>
+          <th>Student</th>
+          <th>Country</th>
+          <th>Grade</th>
+          <th>Intended Term</th>
+          <th>Graduating?</th>
+          <th>Status</th>
+          <th>Submitted</th>
+        </tr>
+      </thead>
+      <tbody id="apps-tbody">
+        <tr><td colspan="7" class="loading">Loading applications...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<!-- ========= DETAIL MODAL ========= -->
+<div class="modal-backdrop" id="modal-backdrop" role="dialog" aria-modal="true">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <h2 id="modal-title">Application</h2>
+        <div class="meta" id="modal-meta"></div>
+      </div>
+      <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+    </div>
+    <div class="modal-actions">
+      <label for="status-select">Status:</label>
+      <select id="status-select">
+        <option value="New">New</option>
+        <option value="In Review">In Review</option>
+        <option value="Interview Scheduled">Interview Scheduled</option>
+        <option value="Accepted">Accepted</option>
+        <option value="Declined">Declined</option>
+        <option value="Withdrawn">Withdrawn</option>
+      </select>
+      <button id="save-status-btn">Save Status</button>
+      <span id="save-status-msg" style="margin-left:auto; font-size:0.85rem;"></span>
+    </div>
+    <div class="modal-body" id="modal-body">
+      <div class="loading">Loading application details...</div>
+    </div>
+  </div>
+</div>
+
+<!-- ========= SCRIPT ========= -->
+<script>
+  const $ = (sel) => document.querySelector(sel);
+
+  // --- Auth state ---
+  const SESSION_KEY = 'bdhs_admin_token';
+  let authToken = sessionStorage.getItem(SESSION_KEY) || null;
+
+  function showApp() {
+    $('#login-screen').style.display = 'none';
+    $('#app').style.display = 'block';
+    loadApplications();
+  }
+  function showLogin() {
+    $('#login-screen').style.display = 'flex';
+    $('#app').style.display = 'none';
+  }
+
+  if (authToken) {
+    showApp();
+  } else {
+    showLogin();
+  }
+
+  // --- Login handler ---
+  $('#login-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const pw = $('#password').value;
+    try {
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: pw }),
+      });
+      if (!res.ok) throw new Error('login failed');
+      const data = await res.json();
+      authToken = data.token;
+      sessionStorage.setItem(SESSION_KEY, authToken);
+      $('#login-error').classList.remove('show');
+      $('#password').value = '';
+      showApp();
+    } catch (err) {
+      $('#login-error').classList.add('show');
+    }
+  });
+
+  $('#logout-btn').addEventListener('click', () => {
+    sessionStorage.removeItem(SESSION_KEY);
+    authToken = null;
+    showLogin();
+  });
+
+  // --- API helper ---
+  async function api(path, options = {}) {
+    const opts = {
+      ...options,
+      headers: {
+        ...(options.headers || {}),
+        'Authorization': 'Bearer ' + authToken,
+      },
+    };
+    const res = await fetch(path, opts);
+    if (res.status === 401) {
+      sessionStorage.removeItem(SESSION_KEY);
+      showLogin();
+      throw new Error('Unauthorized');
+    }
+    if (!res.ok) {
+      const txt = await res.text();
+      throw new Error(txt || 'Request failed');
+    }
+    return res.json();
+  }
+
+  // --- Load and render applications ---
+  let allApps = [];
+
+  async function loadApplications() {
+    try {
+      const data = await api('/api/admin/applications');
+      allApps = data.applications || [];
+      populateFilters(allApps);
+      renderApps();
+    } catch (err) {
+      $('#apps-tbody').innerHTML =
+        `<tr><td colspan="7" class="loading">Error loading applications: ${err.message}</td></tr>`;
+    }
+  }
+
+  function populateFilters(apps) {
+    const termSelect = $('#filter-term');
+    const terms = [...new Set(apps.map(a => a.intended_start_term).filter(Boolean))].sort();
+    // Reset and rebuild
+    termSelect.innerHTML = '<option value="">All Terms</option>';
+    terms.forEach(t => {
+      const opt = document.createElement('option');
+      opt.value = t;
+      opt.textContent = t;
+      termSelect.appendChild(opt);
+    });
+  }
+
+  function renderApps() {
+    const search = $('#search').value.toLowerCase();
+    const status = $('#filter-status').value;
+    const term = $('#filter-term').value;
+
+    const filtered = allApps.filter(a => {
+      if (status && a.status !== status) return false;
+      if (term && a.intended_start_term !== term) return false;
+      if (search) {
+        const hay = [
+          a.student_first_name, a.student_last_name, a.student_preferred_name,
+          a.contact_email, a.student_email, a.nationality, a.place_of_birth,
+          a.father_email, a.mother_email,
+        ].filter(Boolean).join(' ').toLowerCase();
+        if (!hay.includes(search)) return false;
+      }
+      return true;
+    });
+
+    $('#count-pill').textContent = `${filtered.length} application${filtered.length === 1 ? '' : 's'}`;
+
+    const tbody = $('#apps-tbody');
+    if (filtered.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="7"><div class="empty-state"><h3>No applications match</h3><p>Try adjusting filters or clearing the search.</p></div></td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = filtered.map(a => {
+      const name = [a.student_first_name, a.student_last_name].filter(Boolean).join(' ') +
+                   (a.student_preferred_name ? ` (${a.student_preferred_name})` : '');
+      const statusClass = 'status-' + (a.status || 'New').replace(/\s+/g, '');
+      const submitted = a.submitted_at ? new Date(a.submitted_at).toLocaleDateString() : '';
+      const graduating = a.intends_to_graduate ? 'Yes' : 'No';
+      const country = a.place_of_birth || '';
+      return `
+        <tr class="clickable" data-id="${a.id}">
+          <td><strong>${escapeHtml(name) || '(no name)'}</strong><br><small style="color:var(--gray-dark)">${escapeHtml(a.contact_email || '')}</small></td>
+          <td>${escapeHtml(country)}</td>
+          <td>${escapeHtml(a.applying_for_grade || '')}</td>
+          <td>${escapeHtml(a.intended_start_term || '')}</td>
+          <td>${graduating}</td>
+          <td><span class="status-badge ${statusClass}">${escapeHtml(a.status || 'New')}</span></td>
+          <td>${submitted}</td>
+        </tr>
+      `;
+    }).join('');
+
+    // Attach click
+    tbody.querySelectorAll('tr.clickable').forEach(row => {
+      row.addEventListener('click', () => openDetail(row.dataset.id));
+    });
+  }
+
+  function escapeHtml(s) {
+    if (s == null) return '';
+    return String(s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  $('#search').addEventListener('input', renderApps);
+  $('#filter-status').addEventListener('change', renderApps);
+  $('#filter-term').addEventListener('change', renderApps);
+
+  // --- Detail Modal ---
+  let currentApp = null;
+
+  async function openDetail(id) {
+    $('#modal-backdrop').classList.add('open');
+    $('#modal-body').innerHTML = '<div class="loading">Loading application details...</div>';
+    $('#save-status-msg').textContent = '';
+    try {
+      const data = await api('/api/admin/application/' + encodeURIComponent(id));
+      currentApp = data.application;
+      renderDetail(data.application, data.documents || []);
+    } catch (err) {
+      $('#modal-body').innerHTML = `<div class="loading">Error: ${err.message}</div>`;
+    }
+  }
+
+  function renderDetail(app, docs) {
+    const name = [app.student_first_name, app.student_middle_name, app.student_last_name].filter(Boolean).join(' ');
+    $('#modal-title').textContent = name + (app.student_preferred_name ? ` (${app.student_preferred_name})` : '');
+    $('#modal-meta').innerHTML = `Application #${escapeHtml(app.id)} &middot; Submitted ${new Date(app.submitted_at).toLocaleString()} &middot; Contact: ${escapeHtml(app.contact_email)}`;
+    $('#status-select').value = app.status || 'New';
+
+    const f = (label, val) => `
+      <div>
+        <div class="f-label">${label}</div>
+        <div class="f-val ${val ? '' : 'empty'}">${val ? escapeHtml(String(val)) : '—'}</div>
+      </div>
+    `;
+    const fFull = (label, val) => `
+      <div class="full-col">
+        <div class="f-label">${label}</div>
+        <div class="f-val ${val ? '' : 'empty'}">${val ? escapeHtml(String(val)) : '—'}</div>
+      </div>
+    `;
+    const fPre = (label, val) => `
+      <div class="full-col">
+        <div class="f-label">${label}</div>
+        ${val ? `<div class="pre-text">${escapeHtml(String(val))}</div>` : `<div class="f-val empty">—</div>`}
+      </div>
+    `;
+
+    const intentLine = app.intends_to_graduate ? '<strong>Intends to graduate from Bishop Diego</strong>' :
+      `Short-term enrollment${app.planned_duration ? ' · ' + escapeHtml(app.planned_duration) : ''}`;
+
+    const interests = parseMaybeJson(app.interests);
+    const sports = parseMaybeJson(app.sports);
+    const siblings = parseMaybeJson(app.siblings);
+
+    const docsHtml = docs.length === 0
+      ? '<div class="f-val empty">No documents uploaded.</div>'
+      : `<div class="doc-list">${docs.map(d => `
+          <div class="doc-item">
+            <div>
+              <div class="doc-name">${escapeHtml(d.original_name || d.field_name)}</div>
+              <div class="doc-type">${escapeHtml(d.field_name)} &middot; ${formatBytes(d.size)} &middot; ${escapeHtml(d.content_type || '')}</div>
+            </div>
+            <a href="/api/admin/file/${encodeURIComponent(d.key)}?token=${encodeURIComponent(authToken)}" target="_blank" rel="noopener">Download</a>
+          </div>
+        `).join('')}</div>`;
+
+    $('#modal-body').innerHTML = `
+      <div class="section-block">
+        <h3>Enrollment Plans</h3>
+        <div class="field-grid">
+          ${f('Intended Start Term', app.intended_start_term)}
+          ${f('Applying For Grade', app.applying_for_grade)}
+          ${f('Current Grade', app.current_grade)}
+          ${fFull('Graduation Intent', intentLine)}
+          ${fPre('Why Bishop Diego (Q: Contribution to school community)', app.q_contribution)}
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h3>Student Information</h3>
+        <div class="field-grid">
+          ${f('Legal Name', [app.student_first_name, app.student_middle_name, app.student_last_name].filter(Boolean).join(' '))}
+          ${f('Preferred Name', app.student_preferred_name)}
+          ${f('Date of Birth', app.date_of_birth)}
+          ${f('Place of Birth', app.place_of_birth)}
+          ${f('Gender', app.gender)}
+          ${f('Primary Language at Home', app.primary_language)}
+          ${f('Religion', app.religion)}
+          ${f('Student Email', app.student_email)}
+          ${f('Contact Email', app.contact_email)}
+          ${f('Family Language', app.family_language)}
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h3>Interests &amp; Sports</h3>
+        <div class="field-grid">
+          ${fFull('Interests', formatList(interests, app.interests_other))}
+          ${fFull('Favorite Sports', formatList(sports, app.sports_other))}
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h3>School Background</h3>
+        <div class="field-grid">
+          ${f('Current School', app.current_school_name)}
+          ${f('Grades Attended', app.current_school_grades)}
+          ${fFull('Current School Address', app.current_school_address)}
+          ${f('Prior School', app.prior_school_name)}
+          ${f('Prior Grades Attended', app.prior_school_grades)}
+          ${fFull('Prior School Address', app.prior_school_address)}
+          ${f('Disciplinary Action', app.disciplinary_action)}
+          ${app.disciplinary_explanation ? fFull('Explanation', app.disciplinary_explanation) : ''}
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h3>Household</h3>
+        <div class="field-grid">
+          ${fFull('Home Address', app.home_address)}
+          ${f('Parents Status', app.parents_are)}
+          ${f('Financial Responsibility', app.financial_responsibility)}
+          ${f('I-20 Email', app.i20_email)}
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h3>Father</h3>
+        <div class="field-grid">
+          ${f('Name', [app.father_first_name, app.father_last_name].filter(Boolean).join(' '))}
+          ${f('Preferred Name', app.father_preferred_name)}
+          ${f('Phone', app.father_phone)}
+          ${f('Email', app.father_email)}
+          ${f('Company', app.father_company)}
+          ${f('Title', app.father_title)}
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h3>Mother</h3>
+        <div class="field-grid">
+          ${f('Name', [app.mother_first_name, app.mother_last_name].filter(Boolean).join(' '))}
+          ${f('Preferred Name', app.mother_preferred_name)}
+          ${f('Phone', app.mother_phone)}
+          ${f('Email', app.mother_email)}
+          ${f('Company', app.mother_company)}
+          ${f('Title', app.mother_title)}
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h3>Siblings</h3>
+        ${siblings && siblings.length ?
+          `<div class="field-grid">${siblings.map(s => f(s.name || 'Sibling', s.age ? 'Age ' + s.age : '')).join('')}</div>` :
+          '<div class="f-val empty">No siblings listed.</div>'}
+      </div>
+
+      <div class="section-block">
+        <h3>Student Questionnaire</h3>
+        <div class="field-grid">
+          ${fPre('1. What makes you the interesting person you are?', app.q_interesting)}
+          ${fPre('2. What do you read outside of school?', app.q_reading)}
+          ${fPre('3. What contributions would you make to the school community?', app.q_contribution)}
+          ${fPre('4. Tell us about a person who has influenced you', app.q_influence)}
+          ${fPre('5. Difficult decisions in the past two years', app.q_difficult_decisions)}
+          ${fPre('6. Greatest challenge your generation will face', app.q_generational_challenge)}
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h3>Signatures</h3>
+        <div class="field-grid">
+          ${f('Parent Signature', app.parent_signature)}
+          ${f('Student Signature', app.student_signature)}
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h3>Documents</h3>
+        ${docsHtml}
+      </div>
+    `;
+  }
+
+  function parseMaybeJson(v) {
+    if (!v) return null;
+    if (Array.isArray(v) || typeof v === 'object') return v;
+    try { return JSON.parse(v); } catch { return null; }
+  }
+
+  function formatList(arr, other) {
+    const items = (Array.isArray(arr) ? arr : []).slice();
+    if (other) items.push(other + ' (other)');
+    return items.length ? items.join(', ') : '—';
+  }
+
+  function formatBytes(n) {
+    if (!n) return '';
+    if (n < 1024) return n + ' B';
+    if (n < 1024*1024) return (n/1024).toFixed(1) + ' KB';
+    return (n/1024/1024).toFixed(2) + ' MB';
+  }
+
+  // --- Close modal ---
+  $('#modal-close').addEventListener('click', () => $('#modal-backdrop').classList.remove('open'));
+  $('#modal-backdrop').addEventListener('click', (e) => {
+    if (e.target.id === 'modal-backdrop') $('#modal-backdrop').classList.remove('open');
+  });
+
+  // --- Save status ---
+  $('#save-status-btn').addEventListener('click', async () => {
+    if (!currentApp) return;
+    const newStatus = $('#status-select').value;
+    const saveBtn = $('#save-status-btn');
+    const msg = $('#save-status-msg');
+    saveBtn.disabled = true;
+    msg.textContent = 'Saving...';
+    try {
+      await api('/api/admin/application/' + encodeURIComponent(currentApp.id) + '/status', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: newStatus }),
+      });
+      currentApp.status = newStatus;
+      // Update in memory list
+      const idx = allApps.findIndex(a => a.id === currentApp.id);
+      if (idx >= 0) allApps[idx].status = newStatus;
+      renderApps();
+      msg.textContent = 'Saved.';
+      msg.style.color = 'var(--accent-green)';
+    } catch (err) {
+      msg.textContent = 'Error: ' + err.message;
+      msg.style.color = 'var(--accent-red)';
+    } finally {
+      saveBtn.disabled = false;
+      setTimeout(() => { msg.textContent = ''; }, 3000);
+    }
+  });
+</script>
+
+</body>
+</html>

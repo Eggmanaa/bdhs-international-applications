@@ -1,0 +1,24 @@
+name = "bdhs-international-applications"
+compatibility_date = "2025-04-01"
+pages_build_output_dir = "public"
+
+# D1 database binding — created during deploy.
+[[d1_databases]]
+binding = "DB"
+database_name = "bdhs-intl-applications"
+database_id = "REPLACE_AFTER_CREATE"   # populated by `wrangler d1 create`
+
+# R2 bucket binding for uploaded documents
+[[r2_buckets]]
+binding = "DOCS"
+bucket_name = "bdhs-intl-docs"
+
+# Non-secret env vars visible to functions
+[vars]
+NOTIFY_EMAIL_TO = "aeggman@bishopdiego.org,ediaz@bishopdiego.org"
+NOTIFY_EMAIL_FROM = "BDHS International <onboarding@resend.dev>"
+
+# Secrets (set via `wrangler pages secret put`):
+#   ADMIN_PASSWORD       — the admin console password
+#   ADMIN_SECRET_SALT    — random string used to sign admin session tokens
+#   RESEND_API_KEY       — optional: enables email notifications via Resend
