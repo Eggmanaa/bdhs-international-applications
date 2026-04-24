@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS applications (
   id TEXT PRIMARY KEY,
   submitted_at TEXT NOT NULL,
   status TEXT NOT NULL DEFAULT 'New',
+  upload_token TEXT,
 
   contact_email TEXT,
 
@@ -93,4 +94,4 @@ CREATE TABLE IF NOT EXISTS documents (
   FOREIGN KEY (application_id) REFERENCES applications(id)
 );
 
-CREATE INDEX IF NOT EXISTS idx_documents_app_id ON documents(application_id);
+CREATE INDEX IF NOT EXISTS idx_documents_app_id ON docume
