@@ -11,6 +11,6 @@
     "db:init:remote": "wrangler d1 execute bdhs-intl-applications --remote --file=./schema.sql"
   },
   "devDependencies": {
-    "wrangler": "^3.80.0"
+    "wrangler": "^3.114.17"
   }
 }

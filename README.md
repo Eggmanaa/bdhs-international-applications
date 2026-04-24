@@ -103,6 +103,25 @@ Open `/admin.html`. Sign in with the password set via `ADMIN_PASSWORD`. You can:
 - Drill into any application to see every field and download documents
 - Update application status: New → In Review → Interview Scheduled → Accepted / Declined / Withdrawn
 
+
+
+## Post-deploy TODO: enable R2 (one-time)
+
+Document uploads require Cloudflare R2 to be enabled on the account. R2 was not yet
+enabled when the initial deploy happened. To turn it on:
+
+1. Go to https://dash.cloudflare.com → R2 → accept the terms. (Free tier covers
+   10 GB of storage and 1 million reads/month — this project will not exceed it.)
+2. Create a bucket named `bdhs-intl-docs`.
+3. In the Pages project `bdhsinternationalapplications` → Settings → Functions →
+   **R2 bucket bindings**, add: `DOCS` → `bdhs-intl-docs`.
+4. Uncomment the `[[r2_buckets]]` block in `wrangler.toml`.
+5. Redeploy: `npm run deploy`.
+
+Until R2 is enabled, the application form still works and writes to D1, but any
+uploaded files will be silently dropped. The form response reports
+`documentsReceived: 0` until R2 is wired in.
+
 ## Forward-proofing
 
 - The application form's "intended start semester" dropdown is generated in JavaScript and rolls forward automatically each calendar year. No annual maintenance is required.

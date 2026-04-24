@@ -6,12 +6,12 @@ pages_build_output_dir = "public"
 [[d1_databases]]
 binding = "DB"
 database_name = "bdhs-intl-applications"
-database_id = "REPLACE_AFTER_CREATE"   # populated by `wrangler d1 create`
+database_id = "4e7fc519-571d-4fb6-940a-5adf8f381080"   # populated by `wrangler d1 create`
 
-# R2 bucket binding for uploaded documents
-[[r2_buckets]]
-binding = "DOCS"
-bucket_name = "bdhs-intl-docs"
+# R2 bucket binding — PENDING: enable R2 in Cloudflare dashboard, then re-add this block.
+# [[r2_buckets]]
+# binding = "DOCS"
+# bucket_name = "bdhs-intl-docs"
 
 # Non-secret env vars visible to functions
 [vars]
