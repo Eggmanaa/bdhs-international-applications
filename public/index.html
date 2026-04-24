@@ -376,10 +376,13 @@
   .videos { background: var(--gray-light); }
   .videos-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 32px;
     max-width: 1100px;
     margin: 0 auto;
+  }
+  @media (max-width: 720px) {
+    .videos-grid { grid-template-columns: 1fr; }
   }
   .video-card {
     background: var(--white);
@@ -407,31 +410,6 @@
     margin-bottom: 10px;
   }
   .video-card p { color: var(--gray-dark); font-size: 0.95rem; }
-
-  .video-group-title {
-    text-align: center;
-    font-size: 1.4rem;
-    color: var(--cardinal);
-    margin-bottom: 18px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid var(--cardinal);
-    display: inline-block;
-    width: auto;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    max-width: max-content;
-  }
-  .video-group-sub {
-    display: block;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--gray-dark);
-    font-weight: 600;
-    margin-top: 4px;
-  }
 
   /* GALLERY */
   .gallery { background: var(--gray-light); }
@@ -899,91 +877,49 @@
     <span class="eyebrow" style="display:block;text-align:center;">See Bishop Diego in Action</span>
     <h2 class="section-title">Video Tour</h2>
     <p class="section-lede">A quick walk through our campus and an introduction to what the International Program looks like day to day.</p>
-    <h3 class="video-group-title">Campus Tour <span class="video-group-sub">2 minutes · 1080p · 3 parts</span></h3>
-    <div class="videos-grid" style="margin-bottom: 48px;">
-      <div class="video-card">
-        <video controls preload="metadata" poster="/videos/ct-part1-poster.jpg">
-          <source src="/videos/ct-part1.mp4" type="video/mp4">
-        </video>
-        <div class="video-card-body">
-          <div class="video-meta">Part 1 of 3</div>
-          <h3>Welcome to Campus</h3>
-        </div>
-      </div>
-      <div class="video-card">
-        <video controls preload="metadata" poster="/videos/ct-part2-poster.jpg">
-          <source src="/videos/ct-part2.mp4" type="video/mp4">
-        </video>
-        <div class="video-card-body">
-          <div class="video-meta">Part 2 of 3</div>
-          <h3>Courtyards and Classrooms</h3>
-        </div>
-      </div>
-      <div class="video-card">
-        <video controls preload="metadata" poster="/videos/ct-part3-poster.jpg">
-          <source src="/videos/ct-part3.mp4" type="video/mp4">
-        </video>
-        <div class="video-card-body">
-          <div class="video-meta">Part 3 of 3</div>
-          <h3>Athletics and the Hill</h3>
-        </div>
-      </div>
-    </div>
-
-    <h3 class="video-group-title">Inside the International Program <span class="video-group-sub">7 minutes · 1080p · 6 parts</span></h3>
     <div class="videos-grid">
       <div class="video-card">
-        <video controls preload="metadata" poster="/videos/po-part1-poster.jpg">
-          <source src="/videos/po-part1.mp4" type="video/mp4">
+        <video controls preload="metadata" poster="https://pub-6c24cb93ba6b4e02bf8520cd931ccb64.r2.dev/campus-tour-poster.jpg">
+          <source src="https://pub-6c24cb93ba6b4e02bf8520cd931ccb64.r2.dev/campus-tour.mp4" type="video/mp4">
+          Your browser does not support embedded video.
         </video>
         <div class="video-card-body">
-          <div class="video-meta">Part 1 of 6</div>
-          <h3>Care, Nurture, Support</h3>
+          <div class="video-meta">Campus Tour &middot; 2 minutes &middot; 1080p</div>
+          <h3>Welcome to Bishop Diego</h3>
+          <p>A high-definition walk through the Santa Barbara campus our international students call home. Brick courtyards, the bell tower, the Pacific in the distance.</p>
         </div>
       </div>
       <div class="video-card">
-        <video controls preload="metadata" poster="/videos/po-part2-poster.jpg">
-          <source src="/videos/po-part2.mp4" type="video/mp4">
+        <video controls preload="metadata" poster="https://pub-6c24cb93ba6b4e02bf8520cd931ccb64.r2.dev/program-description-poster.jpg">
+          <source src="https://pub-6c24cb93ba6b4e02bf8520cd931ccb64.r2.dev/program-description.mp4" type="video/mp4">
+          Your browser does not support embedded video.
         </video>
         <div class="video-card-body">
-          <div class="video-meta">Part 2 of 6</div>
-          <h3>Your Dedicated Coordinator</h3>
+          <div class="video-meta">Program Overview &middot; 7 minutes</div>
+          <h3>Inside the International Program</h3>
+          <p>A full walkthrough of the Care, Nurture, Support model: the dedicated coordinator, academics, the Buddy System, and where our international graduates go to college.</p>
         </div>
       </div>
       <div class="video-card">
-        <video controls preload="metadata" poster="/videos/po-part3-poster.jpg">
-          <source src="/videos/po-part3.mp4" type="video/mp4">
+        <video controls preload="metadata" poster="https://pub-6c24cb93ba6b4e02bf8520cd931ccb64.r2.dev/student-life-poster.jpg">
+          <source src="https://pub-6c24cb93ba6b4e02bf8520cd931ccb64.r2.dev/student-life.mp4" type="video/mp4">
+          Your browser does not support embedded video.
         </video>
         <div class="video-card-body">
-          <div class="video-meta">Part 3 of 6</div>
-          <h3>Academics &amp; AP Program</h3>
+          <div class="video-meta">Student Voices &middot; 3.5 minutes</div>
+          <h3>Our Life in the USA</h3>
+          <p>Holly, Leona, Viktoria, and Kim tell their own stories, in their own words, about life as international students at Bishop Diego.</p>
         </div>
       </div>
       <div class="video-card">
-        <video controls preload="metadata" poster="/videos/po-part4-poster.jpg">
-          <source src="/videos/po-part4.mp4" type="video/mp4">
+        <video controls preload="metadata" poster="https://pub-6c24cb93ba6b4e02bf8520cd931ccb64.r2.dev/campus-tour-alt-poster.jpg">
+          <source src="https://pub-6c24cb93ba6b4e02bf8520cd931ccb64.r2.dev/campus-tour-alt.mp4" type="video/mp4">
+          Your browser does not support embedded video.
         </video>
         <div class="video-card-body">
-          <div class="video-meta">Part 4 of 6</div>
-          <h3>Community &amp; Buddy System</h3>
-        </div>
-      </div>
-      <div class="video-card">
-        <video controls preload="metadata" poster="/videos/po-part5-poster.jpg">
-          <source src="/videos/po-part5.mp4" type="video/mp4">
-        </video>
-        <div class="video-card-body">
-          <div class="video-meta">Part 5 of 6</div>
-          <h3>College Outcomes</h3>
-        </div>
-      </div>
-      <div class="video-card">
-        <video controls preload="metadata" poster="/videos/po-part6-poster.jpg">
-          <source src="/videos/po-part6.mp4" type="video/mp4">
-        </video>
-        <div class="video-card-body">
-          <div class="video-meta">Part 6 of 6</div>
-          <h3>Santa Barbara &amp; Next Steps</h3>
+          <div class="video-meta">Facilities &middot; 2 minutes</div>
+          <h3>A Tour of Our Facilities</h3>
+          <p>A second walkthrough highlighting Bishop Diego's classrooms, athletics spaces, and historic campus buildings.</p>
         </div>
       </div>
     </div>
