@@ -365,6 +365,42 @@
     margin-bottom: 8px;
   }
 
+  /* VIDEOS */
+  .videos { background: var(--gray-light); }
+  .videos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 32px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .video-card {
+    background: var(--white);
+    border-top: 6px solid var(--cardinal);
+    box-shadow: 0 4px 16px rgba(0,0,0,.08);
+    overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .video-card video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background: #000;
+  }
+  .video-card-body { padding: 22px 24px 26px; }
+  .video-card h3 { font-size: 1.3rem; margin-bottom: 6px; }
+  .video-card .video-meta {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--cardinal);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .video-card p { color: var(--gray-dark); font-size: 0.95rem; }
+
   /* GALLERY */
   .gallery { background: var(--gray-light); }
   .gallery-grid {
@@ -696,6 +732,7 @@
       <ul>
         <li><a href="#program">Program</a></li>
         <li><a href="#outcomes">Outcomes</a></li>
+        <li><a href="#videos">Video Tour</a></li>
         <li><a href="#gallery">Campus</a></li>
         <li><a href="#santa-barbara">Santa Barbara</a></li>
         <li><a href="#enrollment">How to Apply</a></li>
@@ -824,6 +861,38 @@
     <img class="quote-headshot" src="/images/aaron-eggman.jpg" alt="Aaron Eggman, International Program Coordinator">
     <blockquote>"At Bishop Diego, international students don't just survive, they thrive. We don't just enroll international students, we invest in them."</blockquote>
     <cite>— Aaron Eggman, International Program Coordinator</cite>
+  </div>
+</section>
+
+<section id="videos" class="videos">
+  <div class="container">
+    <span class="eyebrow" style="display:block;text-align:center;">See Bishop Diego in Action</span>
+    <h2 class="section-title">Video Tour</h2>
+    <p class="section-lede">A quick walk through our campus and an introduction to what the International Program looks like day to day.</p>
+    <div class="videos-grid">
+      <div class="video-card">
+        <video controls preload="metadata" poster="/videos/campus-tour-poster.jpg">
+          <source src="/videos/campus-tour.mp4" type="video/mp4">
+          Your browser does not support embedded video.
+        </video>
+        <div class="video-card-body">
+          <div class="video-meta">Campus Tour &middot; 60 seconds</div>
+          <h3>A Walk Through Campus</h3>
+          <p>Brick courtyards, the bell tower, the Pacific in the distance. A quick look at the Santa Barbara campus international students call home.</p>
+        </div>
+      </div>
+      <div class="video-card">
+        <video controls preload="metadata" poster="/videos/program-overview-poster.jpg">
+          <source src="/videos/program-overview.mp4" type="video/mp4">
+          Your browser does not support embedded video.
+        </video>
+        <div class="video-card-body">
+          <div class="video-meta">Program Overview &middot; 2 minutes</div>
+          <h3>Inside the International Program</h3>
+          <p>An introduction to the Care, Nurture, Support model, the dedicated coordinator, and how international students integrate into the full Bishop Diego experience. <em>For the complete program overview, contact Mr. Eggman.</em></p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
