@@ -862,4 +862,45 @@
       msg.style.color = 'var(--accent-green)';
     } catch (err) {
       msg.textContent = 'Error: ' + err.message;
-      msg.sty
+      msg.style.color = 'var(--accent-red)';
+    } finally {
+      saveBtn.disabled = false;
+      setTimeout(() => { msg.textContent = ''; }, 3000);
+    }
+  });
+
+  // --- Delete Application ---
+  $('#delete-app-btn').addEventListener('click', async () => {
+    if (!currentApp) return;
+    const name = [currentApp.student_first_name, currentApp.student_last_name].filter(Boolean).join(' ') || currentApp.id;
+    const confirmed = confirm(
+      'Permanently delete the application for ' + name + '?\n\n' +
+      'This removes the database row AND any uploaded documents from R2 storage. ' +
+      'This action cannot be undone.'
+    );
+    if (!confirmed) return;
+
+    const btn = $('#delete-app-btn');
+    const msg = $('#save-status-msg');
+    btn.disabled = true;
+    msg.textContent = 'Deleting...';
+    msg.style.color = 'var(--accent-red)';
+    try {
+      await api('/api/admin/application/' + encodeURIComponent(currentApp.id), {
+        method: 'DELETE',
+      });
+      const idx = allApps.findIndex(a => a.id === currentApp.id);
+      if (idx >= 0) allApps.splice(idx, 1);
+      renderApps();
+      $('#modal-backdrop').classList.remove('open');
+      currentApp = null;
+    } catch (err) {
+      msg.textContent = 'Delete failed: ' + err.message;
+      msg.style.color = 'var(--accent-red)';
+      btn.disabled = false;
+    }
+  });
+</script>
+
+</body>
+</html>
