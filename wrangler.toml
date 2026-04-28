@@ -14,7 +14,7 @@ bucket_name = "bdhs-intl-docs"
 
 # Non-secret env vars visible to functions
 [vars]
-NOTIFY_EMAIL_TO = "aeggman@bishopdiego.org,ediaz@bishopdiego.org"
+NOTIFY_EMAIL_TO = "aeggman@bishopdiego.org"  # ediaz added back once Resend verifies bishopdiego.org
 NOTIFY_EMAIL_FROM = "BDHS International <onboarding@resend.dev>"
 
 # Secrets (set via `wrangler pages secret put`):
