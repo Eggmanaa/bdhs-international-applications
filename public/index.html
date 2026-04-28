@@ -169,36 +169,48 @@
   .stats-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    max-width: 980px;
+    gap: 64px 56px;
+    max-width: 1000px;
     margin: 0 auto;
   }
   @media (max-width: 720px) {
-    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 48px 32px; }
   }
   .stat {
     text-align: center;
-    padding: 32px 16px;
-    background: var(--white);
-    border-top: 4px solid var(--cardinal);
-    transition: transform .2s, box-shadow .2s;
+    background: transparent;
+    padding: 0;
+    border: none;
   }
-  .stat:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,.08); }
   .stat-number {
     font-family: 'Playfair Display', serif;
-    font-weight: 900;
-    font-size: 2.8rem;
+    font-weight: 500;
+    font-size: clamp(3rem, 5vw, 4.2rem);
     color: var(--cardinal);
     line-height: 1;
+    letter-spacing: -0.01em;
+    margin-bottom: 0;
+  }
+  .stat-number::after {
+    content: "";
+    display: block;
+    width: 36px;
+    height: 2px;
+    background: var(--cardinal);
+    margin: 18px auto 0;
   }
   .stat-label {
     font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    font-size: 0.82rem;
+    font-weight: 500;
+    font-size: 0.78rem;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-top: 10px;
-    color: var(--black);
+    letter-spacing: 0.2em;
+    margin-top: 18px;
+    color: var(--gray-dark);
+    max-width: 220px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.45;
   }
 
   /* PILLARS with photo sidebar */
