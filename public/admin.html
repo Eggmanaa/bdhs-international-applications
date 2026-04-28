@@ -462,6 +462,7 @@
       </select>
       <button id="save-status-btn">Save Status</button>
       <span id="save-status-msg" style="margin-left:auto; font-size:0.85rem;"></span>
+      <button id="delete-app-btn" style="background:transparent; color:var(--accent-red); border:1.5px solid var(--accent-red); margin-left: 12px;">Delete Application</button>
     </div>
     <div class="modal-body" id="modal-body">
       <div class="loading">Loading application details...</div>
@@ -861,14 +862,4 @@
       msg.style.color = 'var(--accent-green)';
     } catch (err) {
       msg.textContent = 'Error: ' + err.message;
-      msg.style.color = 'var(--accent-red)';
-    } finally {
-      saveBtn.disabled = false;
-      setTimeout(() => { msg.textContent = ''; }, 3000);
-    }
-  });
-</script>
-
-</body>
-</html>
-                                                                                                                                                                                                                                                                                                                     
+      msg.sty
