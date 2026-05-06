@@ -55,8 +55,10 @@
   .nav-wrap {
     max-width: 1200px; margin: 0 auto;
     padding: 12px 24px;
-    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    display: flex; align-items: center; gap: 24px; flex-wrap: nowrap;
   }
+  .nav-wrap > nav { flex: 1; display: flex; justify-content: center; }
+  .nav-wrap > .nav-apply { white-space: nowrap; flex-shrink: 0; }
   .logo-area { display: flex; align-items: center; gap: 14px; }
   .logo-area img { height: 64px; width: auto; }
   .brand-tag {
@@ -69,7 +71,7 @@
     line-height: 1.2;
   }
   .brand-tag small { display: block; font-size: 0.7rem; font-family: 'Montserrat',sans-serif; text-transform: uppercase; letter-spacing: 0.1em; font-style: normal; opacity: 0.7; margin-top: 2px; }
-  nav ul { list-style: none; display: flex; gap: 22px; flex-wrap: wrap; align-items: center; }
+  nav ul { list-style: none; display: flex; gap: 22px; flex-wrap: wrap; align-items: center; justify-content: center; }
   nav a {
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
@@ -758,9 +760,9 @@
         <li><a href="#gallery">Campus</a></li>
         <li><a href="#santa-barbara">Santa Barbara</a></li>
         <li><a href="#enrollment">How to Apply</a></li>
-        <li><a href="#apply" class="nav-apply">Apply Now</a></li>
       </ul>
     </nav>
+    <a href="#apply" class="nav-apply">Apply Now</a>
   </div>
 </header>
 
