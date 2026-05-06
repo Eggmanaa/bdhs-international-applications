@@ -103,7 +103,7 @@
   }
   .hero-bg {
     position: absolute; inset: 0;
-    background-image: url('/images/graduation.jpg');
+    background-image: url('/images/students-jumping.jpg'); /* TEMP: replace with new graduation.jpg when uploaded */
     background-size: cover;
     background-position: center;
     z-index: 0;
@@ -429,12 +429,12 @@
   .gallery { background: var(--gray-light); }
   .gallery-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
     grid-template-rows: 1fr 1fr;
     gap: 12px;
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 16 / 10;
   }
   .gallery-item {
     background-size: cover;
@@ -447,7 +447,7 @@
   .gallery-item.g2 { background-image: url('/images/science-lab.jpg'); }
   .gallery-item.g3 { background-image: url('/images/campus-bell-tower.jpg'); }
   .gallery-item.g4 { background-image: url('/images/students-jumping.jpg'); }
-  .gallery-item.g5 { background-image: url('/images/graduation.jpg'); }
+  .gallery-item.g5 { background-image: url('/images/students-jumping.jpg'); /* TEMP: replace with new graduation.jpg when uploaded */ }
   @media (max-width: 800px) {
     .gallery-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 180px; aspect-ratio: auto; }
     .gallery-item.g1 { grid-row: span 2; }
@@ -759,8 +759,7 @@
         <li><a href="#videos">Video Tour</a></li>
         <li><a href="#gallery">Campus</a></li>
         <li><a href="#santa-barbara">Santa Barbara</a></li>
-        <li><a href="#enrollment">How to Apply</a></li>
-      </ul>
+        </ul>
     </nav>
     <a href="#apply" class="nav-apply">Apply Now</a>
   </div>
@@ -949,7 +948,6 @@
       <div class="gallery-item g2" role="img" aria-label="Student in science lab"></div>
       <div class="gallery-item g3" role="img" aria-label="Campus courtyard with bell tower"></div>
       <div class="gallery-item g4" role="img" aria-label="Cardinals students jumping"></div>
-      <div class="gallery-item g5" role="img" aria-label="Graduation ceremony at the Santa Barbara Mission"></div>
     </div>
   </div>
 </section>
